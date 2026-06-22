@@ -1,7 +1,16 @@
 from flask import Flask, render_template
 import os
+import mimetypes
 
-app = Flask(__name__)
+# Forzar a Python a registrar el tipo correcto para archivos .js y .css en entornos de producción
+mimetypes.add_type('application/javascript', '.js')
+mimetypes.add_type('text/css', '.css')
+
+app = Flask(
+    __name__,
+    static_folder="static",
+    template_folder="templates"
+)
 
 @app.route('/')
 def index():
